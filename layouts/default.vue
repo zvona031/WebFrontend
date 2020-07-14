@@ -13,6 +13,9 @@
         mdi-plus
       </v-icon>
       <v-spacer />
+      <v-icon v-if="$auth.loggedIn" class="mr-3" @click="goHome">
+        mdi-home
+      </v-icon>
       <div v-if="$auth.loggedIn">
         <v-menu offset-y>
           <template v-slot:activator="{ on, attrs }">
@@ -90,6 +93,9 @@ export default {
     },
     addTask () {
       this.$router.push('/addTask')
+    },
+    goHome () {
+      this.$router.push('/')
     }
   }
 }

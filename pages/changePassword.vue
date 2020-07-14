@@ -1,12 +1,8 @@
 <template>
-  <v-layout
-    column
-    justify-center
-    align-center
-  >
+  <v-container>
     <h1> Change password page</h1>
     <ChangePasswordForm button-text="Change password" :submit-form="changePassword" />
-  </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -27,7 +23,6 @@ export default {
         })
         if (res.success) {
           alert('Changed password successfully!')
-          this.$router.push('/')
         }
       } catch (e) {
         alert(e.message)

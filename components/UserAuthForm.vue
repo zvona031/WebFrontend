@@ -1,6 +1,6 @@
 <template>
   <v-form v-model="valid">
-<v-text-field
+    <v-text-field
       v-if="hasName == 'true'"
       v-model="userInfo.first_name"
       label="First name"
@@ -29,6 +29,17 @@
       :rules="[required('password'),minLenght('password', 6)]"
       @click:append="showPassword = !showPassword"
     />
+
+    <v-text-field
+      v-if="hasName == 'true'"
+      v-model="userInfo.repeatPassword"
+      label="Repeat password"
+      :type="showRepeatPassword ? 'text' : 'password'"
+      :append-icon="showRepeatPassword ? 'mdi-eye' : 'mdi-eye-off'"
+      counter="true"
+      :rules="[required('password'),minLenght('password', 6),passwordMatch(userInfo.password,userInfo.repeatPassword)]"
+      @click:append="showRepeatPassword = !showRepeatPassword"
+    />
     <v-btn :disabled="!valid" @click="submitForm(userInfo)">
       {{ buttonText }}
     </v-btn>
@@ -56,11 +67,13 @@ export default {
     return {
       valid: false,
       showPassword: false,
+      showRepeatPassword: false,
       userInfo: {
         first_name: '',
         last_name: '',
         email: '',
-        password: ''
+        password: '',
+        repeatPassword: ''
       },
       ...validations
     }
